@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ihr Wetter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+</head>
+<body>
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light shadow-sm p-3 mb-5">
+		<a class="navbar-brand" th:href="@{/weather/}">Wetter</a>
+	</nav>	
+	<div class="container">
+		<h1>So wird das Wetter in:</h1>
+		<p th:text="'Stadt: ' + ${forecasts[0].zipcode} + ' ' + ${forecasts[0].name}" />
+		 
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<td>Uhrzeit</td>
+					<td>Temperatur(°C)</td>
+					<td>Wind(km/h)</td>
+					<td>Bewölkung</td>					
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${forecasts.empty}">
+					<td colspan="4">Keine Werte</td>
+				</tr>
+				<tr th:each="forecast : ${forecasts}">
+					<td><span th:text="${forecast.time}"> Uhrzeit </span></td>
+					<td><span th:text="${forecast.temperature}"> Temperatur </span></td>
+					<td><span th:text="${forecast.wind}"> Wind </span></td>
+					<td><span th:text="${forecast.clouds}"> Bewölkung </span></td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+</body>
+</html>
